@@ -1,0 +1,88 @@
+class システム
+types
+
+public ユーザID型 = token;
+public パスワード型 = token;
+public 顧客名型 = token;
+
+public タスクID型 = nat1;
+public 顧客名一覧型 = map タスクID型 to 顧客名型;
+
+public 作業内容型 :: 原因 : token
+						現象 : token
+						対策 : token;
+
+public 交換部品型 :: 型番 : token
+						名称 : token;
+
+public 交換部品集合型 = set of 交換部品型;
+
+public タスク情報型 :: ユーザID : ユーザID型
+					  	顧客名 : 顧客名型
+						  住所 : token
+						  その他 : token
+						  作業内容 : 作業内容型
+						  交換部品集合 : 交換部品集合型;
+
+タスク情報写像型 = map タスクID型 to タスク情報型; 
+
+values
+static public システムインスタンス : システム = new システム();
+
+タスク情報サンプル1 : タスク情報型
+	= mk_タスク情報型(	mk_token("ユーザ0001"),
+									mk_token("顧客0001"),
+									mk_token("住所0001"),
+									mk_token("その他0001"),
+									mk_作業内容型(	mk_token("原因1"),
+															mk_token("現象1"),
+															mk_token("対策1")),
+									{
+										mk_交換部品型(	mk_token("部品型番0001-1"),
+																mk_token("部品名称0001-1")),
+										mk_交換部品型(mk_token("部品型番0001-2"),
+																mk_token("部品名称0001-2"))
+									});
+
+タスク情報サンプル2 : タスク情報型
+	= mk_タスク情報型(	mk_token("ユーザ0002"),
+									mk_token("顧客0002"),
+									mk_token("住所0002"),
+									mk_token("その他0002"),
+									mk_作業内容型(	mk_token("原因2"),
+															mk_token("現象2"),
+															mk_token("対策2")),
+									{
+										mk_交換部品型(	mk_token("部品型番0002-1"),
+																mk_token("部品名称0002-1")),
+										mk_交換部品型(mk_token("部品型番0002-2"),
+																mk_token("部品名称0002-2"))
+									});
+
+instance variables
+
+public 全タスク情報 : タスク情報写像型
+	:= {1 |-> タスク情報サンプル1, 2 |-> タスク情報サンプル2};
+
+-- 以下は、画面がもつべきでは？
+public 現ユーザID : ユーザID型 := mk_token("NULL");
+public 現パスワード : パスワード型 := mk_token("NULL");
+public 現タスクID : タスクID型 := 0;
+-- ここまで
+
+operations
+
+functions
+
+public 認証情報を確認する : システム * ユーザID型 * パスワード型 -> bool
+認証情報を確認する(システム, ユーザID, パスワード) == is not yet specified;
+
+public 顧客名一覧を返す : システム * ユーザID型 -> 顧客名一覧型
+顧客名一覧を返す(システム, ユーザID) == is not yet specified;
+
+public タスク情報を返す : システム * タスクID型 -> タスク情報型
+タスク情報を返す(システム, タスクID) == is not yet specified;
+
+traces
+-- TODO Define Combinatorial Test Traces here
+end システム

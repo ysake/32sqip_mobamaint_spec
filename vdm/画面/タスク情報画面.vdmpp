@@ -1,0 +1,23 @@
+class タスク情報画面 is subclass of 画面
+types
+-- TODO Define types here
+values
+システム : システム = システム`システムインスタンス;
+instance variables
+タスク情報 : システム`タスク情報型
+	:= システム.タスク情報を返す(システム, システム.現タスクID);
+
+public 顧客名フィールド : token := タスク情報.顧客名;
+public 住所フィールド : token := タスク情報.住所;
+public その他フィールド : token := タスク情報.その他;
+
+operations
+
+public 戻るボタンを押下する : () ==> 画面
+戻るボタンを押下する() == return new メンテナンス作業画面();
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end タスク情報画面

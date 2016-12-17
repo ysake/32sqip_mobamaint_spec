@@ -1,0 +1,27 @@
+class メンテナンス作業画面 is subclass of 画面
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+
+public タスク情報ボタンを押下する : () ==> 画面
+タスク情報ボタンを押下する() == return new タスク情報画面();
+
+public 作業内容登録ボタンを押下する : () ==> 画面
+作業内容登録ボタンを押下する() == return new 作業内容登録画面();
+
+public 交換部品登録ボタンを押下する : () ==> 画面
+交換部品登録ボタンを押下する() == return new 交換部品登録画面();
+
+public 作業結果送信ボタンを押下する : () ==> 画面
+作業結果送信ボタンを押下する() == is not yet specified
+post isofclass(タスク一覧画面, RESULT);
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end メンテナンス作業画面

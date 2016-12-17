@@ -1,0 +1,42 @@
+class ユースケース
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+現ユーザ : ユーザ := new ユーザ();
+
+operations
+
+-- テストケースとして書く, VDMUnitを使ってみる
+
+public 基本シナリオを実行する : () ==> ()
+基本シナリオを実行する() ==
+	(
+		現ユーザ.起動する();
+		現ユーザ.ログインする(mk_token("Login"), mk_token("Password"));
+		現ユーザ.タスクを選択する(mk_token("Task1"));
+		現ユーザ.タスク情報を取得する();
+		現ユーザ.作業内容を登録する(mk_token("Work1"));
+		現ユーザ.交換部品を登録する(mk_token("Parts1"));
+		
+		現ユーザ.作業内容を取得する();
+		現ユーザ.交換部品を取得する();
+		
+		現ユーザ.作業結果を送信する();
+	)
+post
+	(
+		現ユーザ.現タスク情報 = mk_token("TaskInfo1")
+		and
+		現ユーザ.現作業内容 = mk_token("Work1")
+		and
+		mk_token("Parts1") in set 現ユーザ.現交換部品集合
+	);
+
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ユースケース
