@@ -9,9 +9,13 @@ values
 
 instance variables
 public 現画面 : 画面 := new ホーム画面();
-public 現タスク情報 : token := mk_token("NULL");
-public 現作業内容 : token := mk_token("NULL");
-public 現交換部品集合 : set of token := {};
+public 現顧客名 : token := mk_token("NULL");
+public 現顧客住所 : token := mk_token("NULL");
+public 現その他情報 : token := mk_token("NULL");
+public 現現象情報 : token := mk_token("NULL");
+public 現原因情報 : token := mk_token("NULL");
+public 現対策情報 : token := mk_token("NULL");
+public 現交換部品集合 : set of 交換部品登録画面`部品フィールド型 := {};
 
 operations
 
@@ -55,7 +59,9 @@ public タスク情報を取得する : () ==> ()
 タスク情報を取得する() == 
 	(
 		現画面 := narrow_(現画面, メンテナンス作業画面).タスク情報ボタンを押下する();
-		現タスク情報 := narrow_(現画面, タスク情報画面).タスク情報;
+		現顧客名 := narrow_(現画面, タスク情報画面).顧客名フィールド;
+		現顧客住所 := narrow_(現画面, タスク情報画面).住所フィールド;
+		現その他情報 := narrow_(現画面, タスク情報画面).その他フィールド;
 		現画面 := narrow_(現画面, タスク情報画面).戻るボタンを押下する();
 	)
 pre isofclass(メンテナンス作業画面, 現画面)
@@ -65,7 +71,9 @@ public 作業内容を登録する : token ==> ()
 作業内容を登録する(work) ==
 	(
 		現画面 := narrow_(現画面, メンテナンス作業画面).作業内容登録ボタンを押下する();
-	  let s = narrow_(現画面, 作業内容登録画面) in s.作業内容を入力する(work);
+	  let s = narrow_(現画面, 作業内容登録画面) in s.現象を入力する(work);
+	  let s = narrow_(現画面, 作業内容登録画面) in s.原因を入力する(work);
+	  let s = narrow_(現画面, 作業内容登録画面) in s.対策を入力する(work);
 		現画面 := narrow_(現画面, 作業内容登録画面).戻るボタンを押下する();		
 	)
 pre isofclass(メンテナンス作業画面, 現画面)
@@ -74,18 +82,21 @@ post 現画面 = 現画面~;
 public 作業内容を取得する : () ==> ()
 作業内容を取得する() ==
 	(
-		現画面 := narrow_(現画面, メンテナンス作業画面).作業内容登録ボタンを押下する();
-	  現作業内容 := narrow_(現画面, 作業内容登録画面).作業内容;
-		現画面 := narrow_(現画面, 作業内容登録画面).戻るボタンを押下する();		
+		現画面 　　:= narrow_(現画面, メンテナンス作業画面).作業内容登録ボタンを押下する();
+	  現現象情報 := narrow_(現画面, 作業内容登録画面).現象フィールド;
+	  現原因情報 := narrow_(現画面, 作業内容登録画面).原因フィールド;
+	  現対策情報 := narrow_(現画面, 作業内容登録画面).対策フィールド;
+		現画面 　　:= narrow_(現画面, 作業内容登録画面).戻るボタンを押下する();		
 	)
 pre isofclass(メンテナンス作業画面, 現画面)
 post 現画面 = 現画面~;
 
-public 交換部品を登録する : token ==> ()
-交換部品を登録する(parts) ==
+public 交換部品を登録する : token * token ==> ()
+交換部品を登録する(型番, 名称) ==
 	(
 		現画面 := narrow_(現画面, メンテナンス作業画面).交換部品登録ボタンを押下する();
-		let s = narrow_(現画面, 交換部品登録画面) in s.交換部品を登録する(parts);
+		let s = narrow_(現画面, 交換部品登録画面)
+		in s.交換部品を追加する(mk_交換部品登録画面`部品フィールド型(型番, 名称));
 		現画面 := narrow_(現画面, 交換部品登録画面).戻るボタンを押下する();
 	)
 pre isofclass(メンテナンス作業画面, 現画面)
@@ -95,7 +106,7 @@ public 交換部品を取得する : () ==> ()
 交換部品を取得する() ==
 	(
 		現画面 := narrow_(現画面, メンテナンス作業画面).交換部品登録ボタンを押下する();
-		現交換部品集合 := narrow_(現画面, 交換部品登録画面).登録済み交換部品集合;
+		現交換部品集合 := narrow_(現画面, 交換部品登録画面).部品フィールド集合;
 		現画面 := narrow_(現画面, 交換部品登録画面).戻るボタンを押下する();
 	)
 pre isofclass(メンテナンス作業画面, 現画面)
@@ -110,7 +121,7 @@ functions
 
 public タスク一覧画面にタスク名が含まれている : タスク一覧画面 * タスク名型 -> bool
 タスク一覧画面にタスク名が含まれている(taskListScreen, taskName) == 
-	taskName in set elems taskListScreen.タスク一覧;
+	taskName in set taskListScreen.タスク一覧テーブル;
 
 traces
 -- TODO Define Combinatorial Test Traces here

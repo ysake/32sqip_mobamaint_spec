@@ -10,8 +10,7 @@ instance variables
 タスク情報 : システム`タスク情報型
 	:= システム.タスク情報を返す(システム, システム.現タスクID);
 
-部品フィールド : システム`交換部品集合型 := タスク情報.交換部品集合;
--- set of 部品フィールド型 を使いたい
+public 部品フィールド集合 : set of 部品フィールド型 := 部品フィールド集合を生成する(タスク情報.交換部品集合);
 
 operations
 
@@ -25,7 +24,9 @@ public 交換部品を変更する : nat1 * 部品フィールド型 ==> ()
 交換部品を変更する(index, parts) == is not yet specified;
 
 functions
--- TODO Define functiones here
+public 部品フィールド集合を生成する : システム`交換部品集合型 -> set of 部品フィールド型
+部品フィールド集合を生成する(交換部品集合) == is not yet specified;
+
 traces
 -- TODO Define Combinatorial Test Traces here
 end 交換部品登録画面

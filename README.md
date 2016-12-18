@@ -1,5 +1,5 @@
 # 32sqip_mobamaint_spec
 
-図の生成コマンド
+図の生成
 
-    $ plantuml -tpng *.uml
+    $ plantuml -tpng diagram/*.uml
