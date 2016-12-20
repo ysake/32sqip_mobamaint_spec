@@ -14,8 +14,9 @@ public タスク一覧テーブル : set of token := rng 顧客名一覧;
 
 operations
 
-public タスク一覧を押下する : nat ==> 画面
-タスク一覧を押下する(項目インデックス) == is not yet specified
+public タスク一覧を押下する : token ==> 画面
+-- 画面遷移しない場合を記述する
+タスク一覧を押下する(タスク名) == return new メンテナンス作業画面()
 post isofclass(メンテナンス作業画面, RESULT);
 
 functions

@@ -61,27 +61,83 @@ static public システムインスタンス : システム = new システム()
 
 instance variables
 
+--public 全タスク情報2 : タスク情報写像型
+--	:= {1 |-> タスク情報サンプル1, 2 |-> タスク情報サンプル2};
+-- タスク情報サンプル1 にアクセスできない。なぜか？
+-- "Name 'システム`タスク情報サンプル1' not in scope in 'システム'" となる。
+
 public 全タスク情報 : タスク情報写像型
-	:= {1 |-> タスク情報サンプル1, 2 |-> タスク情報サンプル2};
+	:= {1 |-> mk_タスク情報型(	mk_token("ユーザ0001"),
+									mk_token("顧客0001"),
+									mk_token("住所0001"),
+									mk_token("その他0001"),
+									mk_作業内容型(	mk_token("原因1"),
+															mk_token("現象1"),
+															mk_token("対策1")),
+									{
+										mk_交換部品型(	mk_token("部品型番0001-1"),
+																mk_token("部品名称0001-1")),
+										mk_交換部品型(mk_token("部品型番0001-2"),
+																mk_token("部品名称0001-2"))
+									}),
+			2 |-> mk_タスク情報型(	mk_token("ユーザ0002"),
+									mk_token("顧客0002"),
+									mk_token("住所0002"),
+									mk_token("その他0002"),
+									mk_作業内容型(	mk_token("原因2"),
+															mk_token("現象2"),
+															mk_token("対策2")),
+									{
+										mk_交換部品型(	mk_token("部品型番0002-1"),
+																mk_token("部品名称0002-1")),
+										mk_交換部品型(mk_token("部品型番0002-2"),
+																mk_token("部品名称0002-2"))
+									})
+			};
 
 -- 以下は、画面がもつべきでは？
 public 現ユーザID : ユーザID型 := mk_token("NULL");
 public 現パスワード : パスワード型 := mk_token("NULL");
-public 現タスクID : タスクID型 := 0;
+public 現タスクID : タスクID型 := 1;
 -- ここまで
 
+送信済みタスク情報 : タスク情報写像型 := { |-> };
+
 operations
+
+public タスク情報を送信する : タスクID型 ==> ()
+タスク情報を送信する(タスクID) == return;
 
 functions
 
 public 認証情報を確認する : システム * ユーザID型 * パスワード型 -> bool
-認証情報を確認する(システム, ユーザID, パスワード) == is not yet specified;
+認証情報を確認する(システム, ユーザID, パスワード) ==
+  -- "システム not use"警告を消すことはできるか？
+	ユーザID  = mk_token("Login")
+	and
+	パスワード = mk_token("Password");
 
 public 顧客名一覧を返す : システム * ユーザID型 -> 顧客名一覧型
-顧客名一覧を返す(システム, ユーザID) == is not yet specified;
+顧客名一覧を返す(システム, ユーザID) ==
+  -- ToDo: システム.全タスク情報 から返すようにする
+	{ 1 |-> mk_token("顧客0001"), 2 |-> mk_token("顧客0002") };
 
 public タスク情報を返す : システム * タスクID型 -> タスク情報型
-タスク情報を返す(システム, タスクID) == is not yet specified;
+タスク情報を返す(システム, タスクID) ==
+  -- ToDo: システム.全タスク情報 から返すようにする
+	mk_タスク情報型(	mk_token("ユーザ0002"),
+									mk_token("顧客0002"),
+									mk_token("住所0002"),
+									mk_token("その他0002"),
+									mk_作業内容型(	mk_token("原因2"),
+															mk_token("現象2"),
+															mk_token("対策2")),
+									{
+										mk_交換部品型(	mk_token("部品型番0002-1"),
+																mk_token("部品名称0002-1")),
+										mk_交換部品型(mk_token("部品型番0002-2"),
+																mk_token("部品名称0002-2"))
+									});
 
 traces
 -- TODO Define Combinatorial Test Traces here

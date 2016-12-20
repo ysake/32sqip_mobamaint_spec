@@ -20,7 +20,14 @@ public パスワードを入力する : token ==> ()
 パスワードを入力する(pass) == IDフィールド := pass;
 
 public ログインボタンを押下する : () ==> 画面
-ログインボタンを押下する() == is not yet specified -- ToDo
+ログインボタンを押下する() ==
+	let
+		sys = システム`システムインスタンス,
+		認証情報確認結果 = sys.認証情報を確認する(sys, IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
+	in
+		if 認証情報確認結果 = true
+		then return new タスク一覧画面()
+		else return self
 post
 	let
 		sys = システム`システムインスタンス,
