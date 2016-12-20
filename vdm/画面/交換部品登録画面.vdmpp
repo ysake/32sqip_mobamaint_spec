@@ -18,14 +18,17 @@ public 戻るボタンを押下する : () ==> 画面
 戻るボタンを押下する() == return new メンテナンス作業画面();
 
 public 交換部品を追加する : 部品フィールド型 ==> ()
-交換部品を追加する(parts) == is not yet specified;
+交換部品を追加する(parts) ==
+	部品フィールド集合 := 部品フィールド集合 union { parts };
 
 public 交換部品を変更する : nat1 * 部品フィールド型 ==> ()
-交換部品を変更する(index, parts) == is not yet specified;
+交換部品を変更する(index, parts) ==
+	部品フィールド集合 := 部品フィールド集合 union { parts };
 
 functions
 public 部品フィールド集合を生成する : システム`交換部品集合型 -> set of 部品フィールド型
-部品フィールド集合を生成する(交換部品集合) == is not yet specified;
+部品フィールド集合を生成する(交換部品集合) == 
+	{ mk_部品フィールド型(交換部品.型番, 交換部品.名称) | 交換部品 in set 交換部品集合 & true };
 
 traces
 -- TODO Define Combinatorial Test Traces here

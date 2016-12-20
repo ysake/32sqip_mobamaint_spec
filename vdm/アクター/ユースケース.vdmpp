@@ -27,12 +27,9 @@ public 基本シナリオを実行する : () ==> ()
 	)
 post
 	(
-		現ユーザ.現顧客名 = mk_token("CustomerName1")
+		現ユーザ.現顧客名 = mk_token("顧客0002")
 		and
-		現ユーザ.現現象情報 = mk_token("Work1")
-		and
-		mk_交換部品登録画面`部品フィールド型(mk_token("P0001"), mk_token("Parts1"))
-			in set 現ユーザ.現交換部品集合
+		現ユーザ.現現象情報 = mk_token("現象2")
 	);
 
 

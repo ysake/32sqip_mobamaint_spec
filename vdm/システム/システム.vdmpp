@@ -101,7 +101,12 @@ public 現パスワード : パスワード型 := mk_token("NULL");
 public 現タスクID : タスクID型 := 1;
 -- ここまで
 
+送信済みタスク情報 : タスク情報写像型 := { |-> };
+
 operations
+
+public タスク情報を送信する : タスクID型 ==> ()
+タスク情報を送信する(タスクID) == return;
 
 functions
 

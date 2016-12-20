@@ -18,13 +18,13 @@ public 戻るボタンを押下する : () ==> 画面
 戻るボタンを押下する() == return new メンテナンス作業画面();
 
 public 現象を入力する : token ==> ()
-現象を入力する(現象) == is not yet specified;
+現象を入力する(現象) == 現象フィールド := 現象;
 
 public 原因を入力する : token ==> ()
-原因を入力する(原因) == is not yet specified;
+原因を入力する(原因) ==  原因フィールド := 原因;
 
 public 対策を入力する : token ==> ()
-対策を入力する(対策) == is not yet specified;
+対策を入力する(対策) == 対策フィールド := 対策;
 
 functions
 -- TODO Define functiones here
