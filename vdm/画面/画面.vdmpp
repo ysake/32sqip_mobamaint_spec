@@ -4,7 +4,10 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+
+protected io : IO := new IO();
+protected temp : bool := false; -- 消したい
+
 operations
 -- TODO Define operations here
 functions

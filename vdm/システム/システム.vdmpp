@@ -66,6 +66,9 @@ instance variables
 -- タスク情報サンプル1 にアクセスできない。なぜか？
 -- "Name 'システム`タスク情報サンプル1' not in scope in 'システム'" となる。
 
+protected io : IO := new IO();
+protected temp : bool := false; -- 消したい
+
 public 全タスク情報 : タスク情報写像型
 	:= {1 |-> mk_タスク情報型(	mk_token("ユーザ0001"),
 									mk_token("顧客0001"),
@@ -106,38 +109,65 @@ public 現タスクID : タスクID型 := 1;
 operations
 
 public タスク情報を送信する : タスクID型 ==> ()
-タスク情報を送信する(タスクID) == return;
+タスク情報を送信する(タスクID) ==
+	(
+		temp := io.echo("システム.タスク情報を送信する\n");
+		return;
+	);
+
+pure public 認証情報を確認する : ユーザID型 * パスワード型 ==> bool
+認証情報を確認する(ユーザID, パスワード) ==
+	(
+		--temp := io.echo("システム.認証情報を確認する\n"); --pureのためにtempを外す
+		if 
+			ユーザID  = mk_token("Login")
+			and
+			パスワード = mk_token("Password")
+		then
+			(
+				--temp := io.echo("システム.認証OK\n");　--pureのためにtempを外す
+				return true;
+			)
+		else
+			(
+				--temp := io.echo("システム.認証NG\n"); --pureのためにtempを外す
+				return false;
+			)
+	);
+
+public 顧客名一覧を返す : ユーザID型 ==> 顧客名一覧型
+顧客名一覧を返す(ユーザID) ==
+	(
+		temp := io.echo("システム.顧客名一覧を返す\n");
+
+	  -- ToDo: システム.全タスク情報 から返すようにする
+		temp := io.echo("システム.顧客名一覧\n");
+		return { 1 |-> mk_token("顧客0001"), 2 |-> mk_token("顧客0002") };
+	);
+
+public タスク情報を返す : タスクID型 ==> タスク情報型
+タスク情報を返す(タスクID) ==
+  -- ToDo: システム.全タスク情報 から返すようにする
+  (
+		temp := io.echo("システム.タスク情報を返す\n");
+		temp := io.echo("システム.タスク情報\n");
+	  return
+		mk_タスク情報型(	mk_token("ユーザ0002"),
+										mk_token("顧客0002"),
+										mk_token("住所0002"),
+										mk_token("その他0002"),
+										mk_作業内容型(	mk_token("原因2"),
+																mk_token("現象2"),
+																mk_token("対策2")),
+										{
+											mk_交換部品型(	mk_token("部品型番0002-1"),
+																	mk_token("部品名称0002-1")),
+											mk_交換部品型(mk_token("部品型番0002-2"),
+																	mk_token("部品名称0002-2"))
+										});
+	);
 
 functions
-
-public 認証情報を確認する : システム * ユーザID型 * パスワード型 -> bool
-認証情報を確認する(システム, ユーザID, パスワード) ==
-  -- "システム not use"警告を消すことはできるか？
-	ユーザID  = mk_token("Login")
-	and
-	パスワード = mk_token("Password");
-
-public 顧客名一覧を返す : システム * ユーザID型 -> 顧客名一覧型
-顧客名一覧を返す(システム, ユーザID) ==
-  -- ToDo: システム.全タスク情報 から返すようにする
-	{ 1 |-> mk_token("顧客0001"), 2 |-> mk_token("顧客0002") };
-
-public タスク情報を返す : システム * タスクID型 -> タスク情報型
-タスク情報を返す(システム, タスクID) ==
-  -- ToDo: システム.全タスク情報 から返すようにする
-	mk_タスク情報型(	mk_token("ユーザ0002"),
-									mk_token("顧客0002"),
-									mk_token("住所0002"),
-									mk_token("その他0002"),
-									mk_作業内容型(	mk_token("原因2"),
-															mk_token("現象2"),
-															mk_token("対策2")),
-									{
-										mk_交換部品型(	mk_token("部品型番0002-1"),
-																mk_token("部品名称0002-1")),
-										mk_交換部品型(mk_token("部品型番0002-2"),
-																mk_token("部品名称0002-2"))
-									});
 
 traces
 -- TODO Define Combinatorial Test Traces here

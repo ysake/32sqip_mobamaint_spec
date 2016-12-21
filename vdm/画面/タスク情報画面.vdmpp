@@ -5,7 +5,7 @@ values
 システム : システム = システム`システムインスタンス;
 instance variables
 タスク情報 : システム`タスク情報型
-	:= システム.タスク情報を返す(システム, システム.現タスクID);
+	:= システム.タスク情報を返す(システム.現タスクID);
 
 public 顧客名フィールド : token := タスク情報.顧客名;
 public 住所フィールド : token := タスク情報.住所;
@@ -14,7 +14,12 @@ public その他フィールド : token := タスク情報.その他;
 operations
 
 public 戻るボタンを押下する : () ==> 画面
-戻るボタンを押下する() == return new メンテナンス作業画面();
+戻るボタンを押下する() ==
+	(
+		temp := io.echo("タスク一覧画面.タスク一覧を押下する\n");
+		temp := io.echo("タスク一覧画面.メンテナンス作業画面に遷移する\n");
+		return new メンテナンス作業画面();
+	);
 
 functions
 -- TODO Define functiones here
