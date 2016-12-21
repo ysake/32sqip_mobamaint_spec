@@ -14,7 +14,11 @@ public その他フィールド : token := タスク情報.その他;
 operations
 
 public 戻るボタンを押下する : () ==> 画面
-戻るボタンを押下する() == return new メンテナンス作業画面();
+戻るボタンを押下する() ==
+	(
+		temp := io.echo("タスク一覧画面.タスク一覧を押下する\n");
+		return new メンテナンス作業画面();
+	);
 
 functions
 -- TODO Define functiones here

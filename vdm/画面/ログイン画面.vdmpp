@@ -13,21 +13,32 @@ operations
 
 -- IDフィールドがpublicにならば、不要では無いのか？
 public IDを入力する : token ==> ()
-IDを入力する(id) == IDフィールド := id;
+IDを入力する(id) ==
+	(
+		temp := io.echo("ログイン画面.IDを入力する\n");
+		IDフィールド := id;
+	);
 
 -- パスワードフィールドがpublicにならば、不要では無いのか？
 public パスワードを入力する : token ==> ()
-パスワードを入力する(pass) == IDフィールド := pass;
+パスワードを入力する(pass) == 
+	(
+		temp := io.echo("ログイン画面.パスワードを入力する\n");
+		IDフィールド := pass;
+	);
 
 public ログインボタンを押下する : () ==> 画面
 ログインボタンを押下する() ==
-	let
-		sys = システム`システムインスタンス,
-		認証情報確認結果 = sys.認証情報を確認する(sys, IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
-	in
-		if 認証情報確認結果 = true
-		then return new タスク一覧画面()
-		else return self
+	(
+		temp := io.echo("ログイン画面.ログインボタンを押下する\n");
+		let
+			sys = システム`システムインスタンス,
+			認証情報確認結果 = sys.認証情報を確認する(sys, IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
+		in
+			if 認証情報確認結果 = true
+			then return new タスク一覧画面()
+			else return self
+	)
 post
 	let
 		sys = システム`システムインスタンス,
@@ -38,7 +49,7 @@ post
 		or
 		-- IDとパスワードが正しくなければ、画面遷移しない
 		(認証情報確認結果 = false and RESULT = self);		
-
+	
 functions
 -- TODO Define functiones here
 traces

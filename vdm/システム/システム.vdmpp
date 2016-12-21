@@ -66,6 +66,9 @@ instance variables
 -- タスク情報サンプル1 にアクセスできない。なぜか？
 -- "Name 'システム`タスク情報サンプル1' not in scope in 'システム'" となる。
 
+protected io : IO := new IO();
+protected temp : bool := false; -- 消したい
+
 public 全タスク情報 : タスク情報写像型
 	:= {1 |-> mk_タスク情報型(	mk_token("ユーザ0001"),
 									mk_token("顧客0001"),
@@ -106,7 +109,11 @@ public 現タスクID : タスクID型 := 1;
 operations
 
 public タスク情報を送信する : タスクID型 ==> ()
-タスク情報を送信する(タスクID) == return;
+タスク情報を送信する(タスクID) ==
+	(
+		temp := io.echo("タスク一覧画面.タスク一覧を押下する\n");
+		return;
+	);
 
 functions
 

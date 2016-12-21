@@ -4,11 +4,15 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+
 operations
 
 public アイコンを押下する : () ==> 画面
-アイコンを押下する() == return new ログイン画面();
+アイコンを押下する() ==
+	(
+		temp := io.echo("ホーム画面.アイコンを押下する\n");
+		return new ログイン画面();
+	)
 
 functions
 -- TODO Define functiones here
