@@ -19,6 +19,7 @@ public タスク一覧を押下する : token ==> 画面
 タスク一覧を押下する(タスク名) ==
 	(
 		temp := io.echo("タスク一覧画面.タスク一覧を押下する\n");
+		temp := io.echo("タスク一覧画面.メンテナンス作業画面に遷移する\n");
 		return new メンテナンス作業画面();
 	)
 post isofclass(メンテナンス作業画面, RESULT);

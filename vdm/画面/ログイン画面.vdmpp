@@ -24,7 +24,7 @@ public パスワードを入力する : token ==> ()
 パスワードを入力する(pass) == 
 	(
 		temp := io.echo("ログイン画面.パスワードを入力する\n");
-		IDフィールド := pass;
+		パスワードフィールド := pass;
 	);
 
 public ログインボタンを押下する : () ==> 画面
@@ -36,7 +36,11 @@ public ログインボタンを押下する : () ==> 画面
 			認証情報確認結果 = sys.認証情報を確認する(sys, IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
 		in
 			if 認証情報確認結果 = true
-			then return new タスク一覧画面()
+			then
+				(
+					temp := io.echo("ログイン画面.タスク一覧画面に遷移する\n");
+					return new タスク一覧画面();
+				)
 			else return self
 	)
 post
