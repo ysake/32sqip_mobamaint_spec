@@ -67,7 +67,6 @@ instance variables
 -- "Name 'システム`タスク情報サンプル1' not in scope in 'システム'" となる。
 
 protected io : IO := new IO();
-protected temp : bool := false; -- 消したい
 
 public 全タスク情報 : タスク情報写像型
 	:= {1 |-> mk_タスク情報型(	mk_token("ユーザ0001"),
@@ -111,26 +110,27 @@ operations
 public タスク情報を送信する : タスクID型 ==> ()
 タスク情報を送信する(タスクID) ==
 	(
-		temp := io.echo("システム.タスク情報を送信する\n");
+		io.print("システム.タスク情報を送信する\n");
 		return;
 	);
 
 pure public 認証情報を確認する : ユーザID型 * パスワード型 ==> bool
 認証情報を確認する(ユーザID, パスワード) ==
 	(
-		--temp := io.echo("システム.認証情報を確認する\n"); --pureのためにtempを外す
+		dcl dummy : bool;
+		dummy := io.echo("システム.認証情報を確認する\n"); --pureのためにtempを外す
 		if 
 			ユーザID  = mk_token("Login")
 			and
 			パスワード = mk_token("Password")
 		then
 			(
-				--temp := io.echo("システム.認証OK\n");　--pureのためにtempを外す
+				dummy := io.echo("システム.認証OK\n");　--pureのためにtempを外す
 				return true;
 			)
 		else
 			(
-				--temp := io.echo("システム.認証NG\n"); --pureのためにtempを外す
+				dummy := io.echo("システム.認証NG\n"); --pureのためにtempを外す
 				return false;
 			)
 	);
@@ -138,10 +138,10 @@ pure public 認証情報を確認する : ユーザID型 * パスワード型 ==
 public 顧客名一覧を返す : ユーザID型 ==> 顧客名一覧型
 顧客名一覧を返す(ユーザID) ==
 	(
-		temp := io.echo("システム.顧客名一覧を返す\n");
+		io.print("システム.顧客名一覧を返す\n");
 
 	  -- ToDo: システム.全タスク情報 から返すようにする
-		temp := io.echo("システム.顧客名一覧\n");
+		io.print("システム.顧客名一覧\n");
 		return { 1 |-> mk_token("顧客0001"), 2 |-> mk_token("顧客0002") };
 	);
 
@@ -149,8 +149,8 @@ public タスク情報を返す : タスクID型 ==> タスク情報型
 タスク情報を返す(タスクID) ==
   -- ToDo: システム.全タスク情報 から返すようにする
   (
-		temp := io.echo("システム.タスク情報を返す\n");
-		temp := io.echo("システム.タスク情報\n");
+		io.print("システム.タスク情報を返す\n");
+		io.print("システム.タスク情報\n");
 	  return
 		mk_タスク情報型(	mk_token("ユーザ0002"),
 										mk_token("顧客0002"),

@@ -7,7 +7,6 @@ instance variables
 現ユーザ : ユーザ := new ユーザ();
 
 io : IO := new IO();
-temp : bool := false; -- 消したい
 
 operations
 
@@ -16,7 +15,7 @@ operations
 public 基本シナリオを実行する : () ==> ()
 基本シナリオを実行する() ==
 	(
-		temp := io.echo("ユースケース.基本シナリオを実行する\n");　-- 戻り値を捨てるにはどうしたらいいのか？
+		io.print("ユースケース.基本シナリオを実行する\n");　-- 戻り値を捨てるにはどうしたらいいのか？
 		現ユーザ.起動する();
 		現ユーザ.ログインする(mk_token("Login"), mk_token("Password"));
 		現ユーザ.タスクを選択する(mk_token("顧客0001"));

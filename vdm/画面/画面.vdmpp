@@ -6,7 +6,6 @@ values
 instance variables
 
 protected io : IO := new IO();
-protected temp : bool := false; -- 消したい
 
 operations
 -- TODO Define operations here
