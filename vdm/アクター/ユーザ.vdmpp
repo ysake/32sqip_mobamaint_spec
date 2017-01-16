@@ -1,12 +1,10 @@
 class ユーザ
 types
-
 public ID型 = token;
 public パスワード型 = token;
 public タスク名型 = token;
 
 values
-
 instance variables
 public 現画面 : 画面 := new ホーム画面();
 public 現顧客名 : token := mk_token("NULL");
@@ -16,11 +14,9 @@ public 現現象情報 : token := mk_token("NULL");
 public 現原因情報 : token := mk_token("NULL");
 public 現対策情報 : token := mk_token("NULL");
 public 現交換部品集合 : set of 交換部品登録画面`部品フィールド型 := {};
-
 io : IO := new IO();
 
 operations
-
 public 起動する : () ==> ()
 起動する() ==
 	(
@@ -35,10 +31,6 @@ public ログインする : ID型 * パスワード型 ==> ()
 	let s = narrow_(現画面, ログイン画面)
 	in (
 		io.print("ユーザ.ログインする\n");
- 		--dcl s : ログイン画面 := narrow_(現画面, ログイン画面); -- 変更するつもりがないのに、変数として定義しているのが気持ち悪い。仕様記述ではあまり使われない。アルゴリズム仕様で使うことがあるかも。
-	  --なぜダメなのか？　定数を代入文の左に置くことはできない。左に置くことができるのは、変数のみ。
-		--s.IDフィールド := id;
-		--s.パスワードフィールド := パスワード;
 		s.IDを入力する(id);
 		s.パスワードを入力する(パスワード);
 		現画面 := s.ログインボタンを押下する();
@@ -56,11 +48,9 @@ public タスクを選択する : タスク名型 ==>  ()
 	)
 pre isofclass(タスク一覧画面, 現画面)
 post
-	-- タスク一覧画面にタスク名が含まれていたので、メンテナンス作業画面に遷移した
 	(タスク一覧画面にタスク名が含まれている(現画面~, タスク名) and
 		isofclass(メンテナンス作業画面, 現画面))
 	or
-	-- タスク一覧画面にタスク名が含まれていなかったので、画面遷移しなかった
 	(not タスク一覧画面にタスク名が含まれている(現画面~, タスク名) and
 		現画面 = 現画面~);
 
@@ -136,11 +126,7 @@ pre isofclass(メンテナンス作業画面, 現画面)
 post isofclass(タスク一覧画面, 現画面);
 
 functions
-
 public タスク一覧画面にタスク名が含まれている : タスク一覧画面 * タスク名型 -> bool
 タスク一覧画面にタスク名が含まれている(taskListScreen, taskName) == 
 	taskName in set taskListScreen.タスク一覧テーブル;
-
-traces
--- TODO Define Combinatorial Test Traces here
 end ユーザ

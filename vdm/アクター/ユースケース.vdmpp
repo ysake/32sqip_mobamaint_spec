@@ -1,17 +1,9 @@
 class ユースケース
-types
--- TODO Define types here
-values
--- TODO Define values here
 instance variables
 現ユーザ : ユーザ := new ユーザ();
-
 io : IO := new IO();
 
 operations
-
--- テストケースとして書く, VDMUnitを使ってみる
-
 public 基本シナリオを実行する : () ==> ()
 基本シナリオを実行する() ==
 	(
@@ -34,10 +26,4 @@ post
 		and
 		現ユーザ.現現象情報 = mk_token("現象2")
 	);
-
-
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end ユースケース

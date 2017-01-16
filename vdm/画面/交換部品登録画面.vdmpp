@@ -13,7 +13,6 @@ instance variables
 public 部品フィールド集合 : set of 部品フィールド型 := 部品フィールド集合を生成する(タスク情報.交換部品集合);
 
 operations
-
 public 戻るボタンを押下する : () ==> 画面
 戻るボタンを押下する() ==
 	(
@@ -40,7 +39,4 @@ functions
 public 部品フィールド集合を生成する : システム`交換部品集合型 -> set of 部品フィールド型
 部品フィールド集合を生成する(交換部品集合) == 
 	{ mk_部品フィールド型(交換部品.型番, 交換部品.名称) | 交換部品 in set 交換部品集合 & true };
-
-traces
--- TODO Define Combinatorial Test Traces here
 end 交換部品登録画面

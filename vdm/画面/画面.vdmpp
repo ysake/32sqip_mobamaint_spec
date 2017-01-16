@@ -1,16 +1,4 @@
 class 画面
-types
--- TODO Define types here
-values
--- TODO Define values here
 instance variables
-
 protected io : IO := new IO();
-
-operations
--- TODO Define operations here
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end 画面

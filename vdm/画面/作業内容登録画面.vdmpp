@@ -1,6 +1,4 @@
 class 作業内容登録画面 is subclass of 画面
-types
--- TODO Define types here
 values
 システム : システム = システム`システムインスタンス;
 
@@ -13,7 +11,6 @@ public 原因フィールド : token := タスク情報.作業内容.原因;
 public 対策フィールド : token := タスク情報.作業内容.対策;
 
 operations
-
 public 戻るボタンを押下する : () ==> 画面
 戻るボタンを押下する() ==
 	(
@@ -42,9 +39,4 @@ public 対策を入力する : token ==> ()
 		io.print("作業内容登録画面.対策を入力する\n");
 		対策フィールド := 対策;
 	);
-
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end 作業内容登録画面

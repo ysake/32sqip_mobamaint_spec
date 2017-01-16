@@ -1,17 +1,11 @@
+-- このクラスは ログイン画面 についての仕様記述である
 class ログイン画面 is subclass of 画面
-types
--- TODO Define types here
-values
--- TODO Define values here
 instance variables
+-- UI要素をインスタンス変数として表現する
 public IDフィールド : token := mk_token("NULL");
 public パスワードフィールド : token := mk_token("NULL");
 
 operations
-
--- <UI部品名>を<アクション>する
-
--- IDフィールドがpublicにならば、不要では無いのか？
 public IDを入力する : token ==> ()
 IDを入力する(id) ==
 	(
@@ -19,7 +13,6 @@ IDを入力する(id) ==
 		IDフィールド := id;
 	);
 
--- パスワードフィールドがpublicにならば、不要では無いのか？
 public パスワードを入力する : token ==> ()
 パスワードを入力する(pass) == 
 	(
@@ -27,13 +20,15 @@ public パスワードを入力する : token ==> ()
 		パスワードフィールド := pass;
 	);
 
+--画面遷移を伴う操作の戻り値は 次の画面のインスタンスである
 public ログインボタンを押下する : () ==> 画面
 ログインボタンを押下する() ==
 	(
+		--操作に対して，VDM++を実行した際に出力されるログが埋め込まれている
 		io.print("ログイン画面.ログインボタンを押下する\n");
 		let
 			sys = システム`システムインスタンス,
-			認証情報確認結果 = sys.認証情報を確認する(IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
+			認証情報確認結果 = sys.認証情報を確認する(IDフィールド, パスワードフィールド)
 		in
 			if 認証情報確認結果 = true
 			then
@@ -46,16 +41,12 @@ public ログインボタンを押下する : () ==> 画面
 post
 	let
 		sys = システム`システムインスタンス,
-		認証情報確認結果 = sys.認証情報を確認する(IDフィールド, パスワードフィールド) -- なぜ、opereationは呼べないのか？ pure 呼べるようになる。
+		認証情報確認結果 = sys.認証情報を確認する(IDフィールド, パスワードフィールド)
 	in
 		-- IDとパスワードが正しければ、タスク一覧画面に遷移する
 		(認証情報確認結果 = true and isofclass(タスク一覧画面, RESULT))
 		or
 		-- IDとパスワードが正しくなければ、画面遷移しない
 		(認証情報確認結果 = false and RESULT = self);		
-	
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+
 end ログイン画面

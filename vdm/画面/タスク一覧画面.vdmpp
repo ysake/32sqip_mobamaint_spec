@@ -1,21 +1,14 @@
 class タスク一覧画面 is subclass of 画面
-types
--- TODO Define types here
 values
-
 システム : システム = システム`システムインスタンス;
 
 instance variables
-
 顧客名一覧 : システム`顧客名一覧型
 	:= システム.顧客名一覧を返す(システム.現ユーザID);
-
 public タスク一覧テーブル : set of token := rng 顧客名一覧;
 
 operations
-
 public タスク一覧を押下する : token ==> 画面
--- 画面遷移しない場合を記述する
 タスク一覧を押下する(タスク名) ==
 	(
 		io.print("タスク一覧画面.タスク一覧を押下する\n");
@@ -23,9 +16,4 @@ public タスク一覧を押下する : token ==> 画面
 		return new メンテナンス作業画面();
 	)
 post isofclass(メンテナンス作業画面, RESULT);
-
-functions
-
-traces
--- TODO Define Combinatorial Test Traces here
 end タスク一覧画面

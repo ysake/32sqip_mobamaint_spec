@@ -1,12 +1,5 @@
 class メンテナンス作業画面 is subclass of 画面
-types
--- TODO Define types here
-values
--- TODO Define values here
-instance variables
--- TODO Define instance variables here
 operations
-
 public タスク情報ボタンを押下する : () ==> 画面
 タスク情報ボタンを押下する() ==
 	(
@@ -41,9 +34,4 @@ public 作業結果送信ボタンを押下する : () ==> 画面
 		return new タスク一覧画面();
 	)
 post isofclass(タスク一覧画面, RESULT);
-
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end メンテナンス作業画面
